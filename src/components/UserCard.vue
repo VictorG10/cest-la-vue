@@ -8,10 +8,10 @@
 </script>
 
 <template>
-  <li :class="$style['user - card']">{{ user.name }}: {{ user.website }}</li>
+  <li :class="user-card">{{ user.name }}: {{ user.website }}</li>
 </template>
 
-<style module>
+<style>
   .user-card {
     border: 2px solid black;
     padding: 10px;
