@@ -1,33 +1,5 @@
-<script>
-  import HomePage from "./components/HomePage.vue";
-  import LoginPage from "./components/LoginPage.vue";
-  import UserPage from "./components/UserPage.vue";
-
-  export default {
-    name: "App",
-    components: { HomePage, LoginPage, UserPage },
-    data: () => ({
-      currentPage: "User",
-    }),
-
-    computed: {
-      renderPage() {
-        return this.currentPage + "Page";
-      },
-    },
-
-    methods: {
-      showHomePage() {
-        this.currentPage = "Home";
-      },
-      showLoginPage() {
-        this.currentPage = "Login";
-      },
-      showUserPage() {
-        this.currentPage = "User";
-      },
-    },
-  };
+<script setup>
+  import { RouterLink } from "vue-router";
 </script>
 
 <template>
@@ -36,22 +8,20 @@
       <img src="@/assets/vue-heart.png" width="30" />C'est La Vue
     </span>
     <nav class="nav">
-      <a href="#" @click.prevent="showHomePage">Home</a>
-      <a href="#" @click.prevent="showLoginPage">Login</a>
-      <a href="#" @click.prevent="showUserPage">User</a>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/login">Login</RouterLink>
+      <RouterLink to="/user">User</RouterLink>
     </nav>
   </header>
 
   <Suspense>
-    <component :is="renderPage" />
+    <RouterView />
 
     <template #fallback>
       <h1>Loading...</h1>
     </template>
   </Suspense>
 </template>
-
-<!-- 5:40:32 -->
 
 <style>
   * {

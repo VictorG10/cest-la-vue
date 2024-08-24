@@ -1,6 +1,7 @@
 <script setup>
-  import UserCard from "./UserCard.vue";
+  import UserCard from "@/components/UserCard.vue";
   import { userList } from "@/composables/useUserStore";
+  import { useRoute } from "vue-router";
 
   defineProps({
     title: { type: String, default: "Users" },
