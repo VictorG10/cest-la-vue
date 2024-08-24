@@ -1,21 +1,30 @@
 <script>
   import HomePage from "./components/HomePage.vue";
   import LoginPage from "./components/LoginPage.vue";
+  import UserPage from "./components/UserPage.vue";
 
   export default {
-    components: {
-      HomePage,
-      LoginPage,
-    },
+    name: "App",
+    components: { HomePage, LoginPage, UserPage },
     data: () => ({
-      currentPage: "Home",
+      currentPage: "User",
     }),
+
+    computed: {
+      renderPage() {
+        return this.currentPage + "Page";
+      },
+    },
+
     methods: {
       showHomePage() {
         this.currentPage = "Home";
       },
       showLoginPage() {
         this.currentPage = "Login";
+      },
+      showUserPage() {
+        this.currentPage = "User";
       },
     },
   };
@@ -29,11 +38,20 @@
     <nav class="nav">
       <a href="#" @click.prevent="showHomePage">Home</a>
       <a href="#" @click.prevent="showLoginPage">Login</a>
+      <a href="#" @click.prevent="showUserPage">User</a>
     </nav>
   </header>
-  <HomePage v-if="currentPage === 'Home'" />
-  <LoginPage v-else />
+
+  <Suspense>
+    <component :is="renderPage" />
+
+    <template #fallback>
+      <h1>Loading...</h1>
+    </template>
+  </Suspense>
 </template>
+
+<!-- 5:40:32 -->
 
 <style>
   * {
@@ -73,5 +91,35 @@
 
   .nav a:last-child {
     padding-right: 0;
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  main h1 {
+    margin-top: 10vh;
+    margin-bottom: 20px;
+  }
+
+  label {
+    margin-bottom: 5px;
+  }
+
+  input[type="email"] {
+    padding: 0.5rem;
+    margin-bottom: 30px;
+  }
+
+  button {
+    border: 1px solid green;
+    padding: 10px;
+    color: green;
+    background-color: rgb(213, 255, 213);
+    cursor: pointer;
   }
 </style>
