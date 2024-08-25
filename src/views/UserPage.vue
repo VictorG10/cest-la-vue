@@ -1,21 +1,14 @@
 <script setup>
   import UserCard from "@/components/UserCard.vue";
-  import { userList } from "@/composables/useUserStore";
-  import { useRoute } from "vue-router";
+  import { useUserStore } from "@/stores/UserStore";
+
+  const userStore = useUserStore();
 
   defineProps({
     title: { type: String, default: "Users" },
   });
 
-  async function fetchUsers() {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/users"
-    ).then((response) => response.json());
-
-    return response;
-  }
-
-  userList.value = await fetchUsers();
+  userStore.fetchUsers();
 </script>
 
 <template>
@@ -23,7 +16,7 @@
     <h1>{{ title }}</h1>
     <ul>
       <UserCard
-        v-for="user in userList"
+        v-for="user in userStore.userList"
         :key="`user-${user.id}`"
         :user="user"
       />
