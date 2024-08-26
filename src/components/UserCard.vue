@@ -8,8 +8,6 @@
 </script>
 
 <template>
-  <!-- <li :class="$style['user - card']">{{ user.name }}: {{ user.website }}</li> -->
-  <li class="user-card">{{ user.name }}: {{ user.website }}</li>
   <li class="user-card">
     <RouterLink :to="`/user/${user.name}`">
       {{ user.name }}: {{ user.website }}
